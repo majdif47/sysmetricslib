@@ -1,4 +1,4 @@
-package cpuinfo
+package cpu
 
 import (
 	"bufio"

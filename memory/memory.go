@@ -1,4 +1,4 @@
-package memoryinfo
+package memory
 
 import (
 	"bufio"

@@ -1,4 +1,4 @@
-package networkinfo
+package network
 
 import (
 	"fmt"

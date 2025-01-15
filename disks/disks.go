@@ -1,4 +1,4 @@
-package diskinfo
+package disks
 
 import (
 	"syscall"
