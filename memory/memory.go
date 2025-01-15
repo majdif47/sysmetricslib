@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type memInfo struct {
+type MemInfo struct {
   TotalMemory float64
   UsedMemory  float64
   FreeMemory  float64
@@ -16,7 +16,7 @@ type memInfo struct {
   FreeSwap    float64
 }
 
-func getMemoryStats() (*memInfo, error) {
+func GetMemoryStats() (*MemInfo, error) {
   file, err := os.Open("/proc/meminfo")
   if err != nil {
     return nil, err
@@ -44,7 +44,7 @@ func getMemoryStats() (*memInfo, error) {
   }
   swapUsed = swapTotal- swapFree
   memUsed = memTotal - memFree
-  return &memInfo{
+  return &MemInfo{
     TotalMemory: ((memTotal/1024)/1024),
     UsedMemory: ((memUsed/1024)/1024),
     FreeMemory: ((memFree/1024)/1024),

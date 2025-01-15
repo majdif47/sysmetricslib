@@ -18,6 +18,8 @@ type NetInfo struct {
 	TxErrors    uint64
 }
 
+
+
 func readFileAsString(path string) (string, error) {
 	content, err := os.ReadFile(path)
 	if err != nil {
@@ -42,7 +44,7 @@ func readFileAsInt64(path string) (int64, error) {
 	return strconv.ParseInt(content, 10, 64)
 }
 
-func getNetworkInterfaces() ([]NetInfo, error) {
+func GetNetworkInterfaces() ([]NetInfo, error) {
 	var interfaces []NetInfo
 
 	entries, err := os.ReadDir("/sys/class/net")

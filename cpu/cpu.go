@@ -28,7 +28,43 @@ type cpuTime struct {
 }
 
 
+type CPUINFO struct {
+  InfoCPU       cpuInfo
+  TimeCPU       cpuTime
+  TimePerThread map[string]*cpuTime 
+  UsageCPU      string
+  UsageThreads  map[string]float64
+}
 
+func GetCpuInfo() (*CPUINFO, error) {
+  infoCpu, err := getCpuInfo()
+  if err != nil {
+    return nil,err
+  }
+  timeCpu, err := getCpuTime()
+  if err != nil {
+    return nil,err
+  }
+  timePerThread,err := getCpuTimePerThread()
+  if err != nil {
+    return nil,err
+  }
+  usageCpu, err := getCpuUsage()
+  if err != nil {
+    return nil,err
+  }
+  usageThreads, err := getThreadsUsage()
+  if err != nil {
+    return nil,err
+  }
+  return &CPUINFO{
+    InfoCPU: *infoCpu,
+    TimeCPU: *timeCpu,
+    TimePerThread: timePerThread,
+    UsageCPU: usageCpu,
+    UsageThreads: usageThreads,
+  },nil
+}
 
 
 
