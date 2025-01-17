@@ -60,33 +60,18 @@ func GetNetworkInterfaces() ([]NetInfo, error) {
 
 		state, err := readFileAsString(filepath.Join(basePath, "operstate"))
 		if err != nil {
-			fmt.Printf("Warning: Could not read state for %s: %v\n", ifName, err)
 			state = "unknown"
 		}
 
 		speed, err := readFileAsInt64(filepath.Join(basePath, "speed"))
 		if err != nil {
-			fmt.Printf("Info: Speed not available for %s: %v\n", ifName, err)
 			speed = -1
 		}
 
-		rxBytes, err := readFileAsUint64(filepath.Join(basePath, "statistics/rx_bytes"))
-		if err != nil {
-			fmt.Printf("Warning: Could not read RX bytes for %s: %v\n", ifName, err)
-		}
-		txBytes, err := readFileAsUint64(filepath.Join(basePath, "statistics/tx_bytes"))
-		if err != nil {
-			fmt.Printf("Warning: Could not read TX bytes for %s: %v\n", ifName, err)
-		}
-		rxErrors, err := readFileAsUint64(filepath.Join(basePath, "statistics/rx_errors"))
-		if err != nil {
-			fmt.Printf("Warning: Could not read RX errors for %s: %v\n", ifName, err)
-		}
-		txErrors, err := readFileAsUint64(filepath.Join(basePath, "statistics/tx_errors"))
-		if err != nil {
-			fmt.Printf("Warning: Could not read TX errors for %s: %v\n", ifName, err)
-		}
-
+		rxBytes, _ := readFileAsUint64(filepath.Join(basePath, "statistics/rx_bytes"))
+		txBytes, _ := readFileAsUint64(filepath.Join(basePath, "statistics/tx_bytes"))
+		rxErrors, _ := readFileAsUint64(filepath.Join(basePath, "statistics/rx_errors"))
+		txErrors, _ := readFileAsUint64(filepath.Join(basePath, "statistics/tx_errors"))
 		interfaces = append(interfaces, NetInfo{
 			Name:     ifName,
 			State:    state,
